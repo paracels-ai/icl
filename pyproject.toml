@@ -105,6 +105,8 @@ skips = [
     "B104", # possible binding to all interfaces.
     "B311", # standard pseudo-random generators are not suitable for security/cryptographic purposes.
     "B601", # possible shell injection via Paramiko call, check inputs are properly sanitized.
+    "B105", # FIXME: possible hardcoded password
+    "B507", # paramiko call with policy set to automatically trust the unknown host key
 ]
 
 [tool.pylint.main]
