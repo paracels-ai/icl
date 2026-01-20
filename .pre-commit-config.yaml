@@ -24,7 +24,7 @@ repos:
       - id: interrogate
         pass_filenames: false
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.7.5
+    rev: 1.8.6
     hooks:
       - id: bandit
         args: ["-c", "pyproject.toml"]
