@@ -12,7 +12,6 @@ k8s.gcr.io/kube-scheduler:v1.23.10
 k8s.gcr.io/kube-scheduler:v1.24.6
 k8s.gcr.io/pause:3.8
 kuberay/operator:v0.4.0
-kubernetesui/dashboard:v2.6.0
 minio/console:v0.20.3
 minio/operator:v4.5.1
 pbchekin/icl-jupyterhub:0.0.18

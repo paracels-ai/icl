@@ -37,6 +37,5 @@ terraform_tfvars: |
   prefect_api_url = "http://prefect.localtest.me/api"
   jupyterhub_pre_puller_enabled = false
   prometheus_enabled = false
-  kubernetes_dashboard_enabled = false
   use_node_ip_for_user_ports = true
   use_external_node_ip_for_user_ports = true

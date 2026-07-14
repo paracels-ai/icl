@@ -27,7 +27,6 @@ cd icl
 The process will create endpoints accessible only from localhost:
 
 * http://jupyter.localtest.me
-* http://dashboard.localtest.me
 * http://minio.localtest.me
 * http://prefect.localtest.me
 
@@ -160,7 +159,6 @@ flowchart LR
                 ray`"]
             system["`
                 prometheus
-                kubernetes dashboard
                 docker registry
                 cert manager
                 ingress

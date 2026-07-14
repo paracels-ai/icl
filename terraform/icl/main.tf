@@ -63,12 +63,6 @@ module "docker-registry" {
   ingress_domain = var.ingress_domain
 }
 
-module "kubernetes-dashboard" {
-  count = var.kubernetes_dashboard_enabled ? 1 : 0
-  source = "../modules/kubernetes-dashboard"
-  ingress_domain = var.ingress_domain
-}
-
 module "externaldns" {
   count = var.externaldns_enabled ? 1 : 0
   source = "../modules/externaldns"

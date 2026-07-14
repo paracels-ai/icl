@@ -446,8 +446,4 @@ fi
 with_corefile
 control_node "terraform -chdir=terraform/icl init -upgrade -input=false && terraform -chdir=terraform/icl apply -input=false -auto-approve ${terraform_extra_args[*]}"
 
-echo
-get_admin_token
-echo
-
 echo "To delete the cluster run '$0 --delete'"

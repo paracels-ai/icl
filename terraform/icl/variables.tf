@@ -70,12 +70,6 @@ variable "metrics_server_enabled" {
   default = false
 }
 
-variable "kubernetes_dashboard_enabled" {
-  description = "Enable Kubernetes dashboard"
-  type = bool
-  default = true
-}
-
 variable "clearml_enabled" {
   description = "Enable ClearML https://github.com/allegroai/clearml"
   type = bool

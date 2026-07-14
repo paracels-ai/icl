@@ -7,10 +7,6 @@ There are two types of the ICL cluster endpoints:
 
 Note that external endpoints are also accessible from the cluster.
 
-## Kubernetes Dashboard
-
-* External: http://dashboard.{ingress_domain}/
-
 ## Ceph Dashboard
 
 * External: http://ceph.{ingress_domain}/

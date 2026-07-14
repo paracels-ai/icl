@@ -339,11 +339,6 @@ if [[ " $@ " =~ " --print-workspace " ]]; then
   exit $?
 fi
 
-if [[ " $1 " =~ " --get-admin-token " ]]; then
-  get_admin_token
-  exit $?
-fi
-
 if [[ " $1 " =~ " --console " ]]; then
   shift
   _rest_args="$@"
@@ -372,4 +367,3 @@ render_workspace
 deploy_gke
 update_config
 deploy_x1
-get_admin_token
