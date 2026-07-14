@@ -45,8 +45,21 @@ function install_kind() {
   if ! is_installed curl; then
     exit 1
   fi
+
+  local os arch
+  case "$(uname -s)" in
+    Linux) os="linux" ;;
+    Darwin) os="darwin" ;;
+    *) fail "Unsupported OS: $(uname -s)"; exit 1 ;;
+  esac
+  case "$(uname -m)" in
+    x86_64|amd64) arch="amd64" ;;
+    arm64|aarch64) arch="arm64" ;;
+    *) fail "Unsupported architecture: $(uname -m)"; exit 1 ;;
+  esac
+
   mkdir -p "$HOME/bin"
-  curl -sSL -o "$HOME/bin/kind" "https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-linux-amd64"
+  curl -sSL -o "$HOME/bin/kind" "https://kind.sigs.k8s.io/dl/${KIND_VERSION}/kind-${os}-${arch}"
   chmod a+x "$HOME/bin/kind"
 }
 
