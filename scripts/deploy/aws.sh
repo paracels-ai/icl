@@ -12,7 +12,7 @@ declare -g JUPYTERHUB_EXTRA_RESOURCE_LIMITS
 # Default values that can be overriden by corresponding environment variables
 : ${X1_CLUSTER_NAME:="x1-$USER"}
 : ${AWS_DEFAULT_REGION:="us-east-1"}
-: ${X1_CLUSTER_VERSION:="1.28"}
+: ${X1_CLUSTER_VERSION:="1.34"}
 : ${X1_EXTERNALDNS_ENABLED:="false"}
 : ${CONTROL_NODE_IMAGE:="pbchekin/icl-ccn-aws:0.0.1"}
 : ${ICL_INGRESS_DOMAIN:="test.x1infra.com"}
