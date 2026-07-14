@@ -54,6 +54,13 @@ resource "helm_release" "prefect-server" {
       postgresql:
         enabled: true
         useSubChart: true
+        # The versioned "bitnami/postgresql" tags were removed when Bitnami migrated
+        # their catalog (Aug 2025); "bitnamilegacy" hosts the compatible image the
+        # subchart expects (correct /bitnami paths, env vars, and non-root UID).
+        image:
+          registry: docker.io
+          repository: bitnamilegacy/postgresql
+          tag: 14.3.0
         auth:
           password: e0e2eda98519739fa4656e4cc502841b
     EOT

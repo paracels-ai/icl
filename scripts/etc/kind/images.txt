@@ -1,4 +1,4 @@
-docker.io/bitnami/postgresql:14.3.0
+docker.io/bitnamilegacy/postgresql:14.3.0
 docker.io/kindest/kindnetd:v20220726-ed811e41
 docker.io/kindest/local-path-provisioner:v0.0.22-kind.0
 jupyterhub/configurable-http-proxy:4.5.3
