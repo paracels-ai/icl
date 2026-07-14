@@ -1,21 +1,6 @@
-
-data "aws_ami" "current_aws_ami" {
-  most_recent = true
-    owners = [ "${var.gpu_type == "nvidia" ?
-                  "099720109477" :
-                  "602401143452"}" ]
-
-  filter {
-    name = "name"
-    values = [ "${var.gpu_type == "nvidia" ?
-                  "*ubuntu-eks/k8s_${var.cluster_version}/images/hvm-ssd/ubuntu-focal-20.04-amd64-*" :
-                  "amazon-eks-node-${var.cluster_version}-*"}"]
-  }
-}
-
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "19.0.4"
+  version = "~> 20.37"
   attach_cluster_encryption_policy = false
   cluster_enabled_log_types = []
   cluster_endpoint_private_access = true
@@ -23,6 +8,14 @@ module "eks" {
   cluster_name = var.cluster_name
   cluster_version = var.cluster_version
   create_cloudwatch_log_group = false
+
+  # The aws-auth ConfigMap is no longer managed by the module in v20+; access
+  # is managed via EKS access entries. Grant the identity running Terraform
+  # (the control node) cluster admin so the subsequent update-kubeconfig and
+  # workload deploy (kubectl/helm) are authorized. Managed node group roles
+  # get access entries automatically.
+  enable_cluster_creator_admin_permissions = true
+
   vpc_id = var.vpc_id
   subnet_ids = var.subnet_ids
 
@@ -77,14 +70,15 @@ module "eks" {
       min_size = 2
       max_size = 2
       desired_size = 2
-      ami_type = "AL2_x86_64"
-      ami_id = data.aws_ami.current_aws_ami.id
-      enable_bootstrap_user_data = true
+      # AWS-managed EKS-optimized AL2023 AMI (nodeadm bootstrap). GPU nodes use
+      # the NVIDIA-optimized variant (drivers preinstalled); requires a GPU
+      # instance type via ICL_AWS_INSTANCE_TYPE.
+      ami_type = var.gpu_type == "nvidia" ? "AL2023_x86_64_NVIDIA" : "AL2023_x86_64_STANDARD"
       instance_types = ["${var.instance_type}"]
       capacity_type  = "ON_DEMAND"
       block_device_mappings = {
-        root = {
-          device_name = data.aws_ami.current_aws_ami.root_device_name
+        xvda = {
+          device_name = "/dev/xvda"
           ebs         = {
             volume_size           = 250
             volume_type           = "gp3"
